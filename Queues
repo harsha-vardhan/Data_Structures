@@ -1,0 +1,123 @@
+import java.io.*;
+
+
+class Node{
+	private Node link;
+	private int info;
+	
+	// Creating a Node
+	public Node()
+	{
+		link = null;
+		info = 0;
+	}
+	
+	public Node(int data)
+	{
+		link = null;
+		info = data;
+	}
+	
+	public Node(int data, Node n){
+		link = n;
+		info = data;
+		
+	}
+
+	public Node getLink() {
+		return link;
+	}
+
+	public void setLink(Node link) {
+		this.link = link;
+	}
+
+	public int getInfo() {
+		return info;
+	}
+
+	public void setInfo(int info) {
+		this.info = info;
+	}
+}
+
+
+public class Queue {
+	Node Front;
+	Node End;
+	
+	Queue(){
+		Front = null;
+		End = null;
+	}
+	
+	public void Enqueue(int data){
+		if (Front == null && End == null){
+			Node Temp = new Node();
+			Temp.setInfo(data);
+			Temp.setLink(null);
+			Front = Temp;
+			End = Temp;
+		}
+		else if ( Front != End  || Front == End){
+			Node Temp = new Node();
+			Temp.setInfo(data);
+			Temp.setLink(End);
+			End = Temp;
+		}
+		
+	}
+	public void Dequeue(){
+		Node current;
+		if (Front == null){
+			System.out.println("No element to Dequeue");
+		}
+		else{
+			current = Front;
+			Front = Front.getLink();
+			current = null;
+		}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Queue q = new Queue();
+		while(true){
+			System.out.println("Enter your choice:");
+			System.out.println("1.Enqueue");
+			System.out.println("2. Dequeue");
+			System.out.println("3.System Exit");
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			int option;
+			try {
+        		option = Integer.parseInt(br.readLine());
+        		
+        		switch(option)
+        		{
+        		case 1:
+        		{
+        			System.out.println("Enter the value Queue");
+        			int i = Integer.parseInt(br.readLine());
+        			
+        			q.Enqueue(i);
+        			
+        			break;
+        		}
+        		case 2:
+        		{
+        			System.out.println("Dequeue");
+        			q.Dequeue();
+        			break;
+        			
+        		}
+        		case 3:System.exit(0);
+        		default:System.out.println("Enter number between 1 and 3");
+        		
+        	}
+        	}catch (NumberFormatException | IOException e){
+        		System.out.println("Provide valid integer number");
+        	}
+			
+		}
+	}
+
+}
