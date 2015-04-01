@@ -1,0 +1,138 @@
+import java.io.*;
+
+class Node {
+
+	private Node link;
+	private int info;
+	
+	// Creating a Node
+	public Node()
+	{
+		link = null;
+		info = 0;
+	}
+	
+	public Node(int data)
+	{
+		link = null;
+		info = data;
+	}
+	
+	public Node(int data, Node n){
+		link = n;
+		info = data;
+		
+	}
+
+	public Node getLink() {
+		return link;
+	}
+
+	public void setLink(Node link) {
+		this.link = link;
+	}
+
+	public int getInfo() {
+		return info;
+	}
+
+	public void setInfo(int info) {
+		this.info = info;
+	}
+}
+
+
+public class Stack {
+	Node top;
+	int count = 0;
+	
+	Stack(){
+		top = null;
+	}
+	
+	public void Push(int data){
+		if (top == null){
+			Node temp = new Node();
+			temp.setInfo(data);
+			temp.setLink(null);
+			top = temp;
+		}
+		else{ 
+			Node temp = new Node();
+			temp.setInfo(data);
+			temp.setLink(top);
+			top = temp;
+		}
+		count += 1;
+	}
+	public void Pop(){
+		if(top == null){
+			System.out.println("No element to pop");
+		}
+		else{
+			Node temp;
+			temp = top;
+			System.out.println(top.getInfo());
+			top = top.getLink();
+			temp = null;
+			count -= 1;
+		}
+	}
+	public void top(){
+		if(top == null){
+			System.out.println("No element in Stack.");
+		}
+		else{
+		System.out.println("Top Value :" + top.getInfo());
+	}
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Stack s = new Stack();
+		while(true){
+		System.out.println("Enter your Option:");
+		System.out.println("1. Push a value:");
+		System.out.println("2. Pop");
+		System.out.println("3. Top Value");
+		System.out.println("4. Exit");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int option;
+		try {
+    		option = Integer.parseInt(br.readLine());
+    		
+    		switch(option)
+    		{
+    		case 1:
+    		{
+    			System.out.println("Enter the value to be added");
+    			int i = Integer.parseInt(br.readLine());
+    			
+    			s.Push(i);
+    			
+    			break;
+    		}
+    		case 2:
+    		{
+    			s.Pop();
+    			break;
+    			
+    		}
+    		case 3:
+    		{
+    			s.top();
+    			break;
+    		}
+    		case 4:
+    			{
+    				System.exit(0);
+    				break;
+    			}
+    		default: System.out.println("Enter number between 1 and 3");
+    	}
+    	}catch (NumberFormatException | IOException e){
+    		System.out.println("Provide valid integer number");
+    	}
+		}
+	}
+
+}
